@@ -43,7 +43,9 @@ let g:autoformat_verbosemode=1
 " %L 总行数
 " %{...} 评估表达式的值，并用值代替
 " %{"[fenc=".(&fenc==""?&enc:&fenc).((exists("+bomb") && &bomb)?"+":"")."]"} 显示文件编码
+
 " %{&ff} 显示文件类型
+
 set statusline=%F%r%h%w%=\ [ft=%Y]\ %{\"[fenc=\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\"+\":\"\").\"]\"}\ [pos=%04l,%04v\ %p%%]\ [len=%L]
 
 " 设置 laststatus = 0 ，不显式状态行
@@ -76,9 +78,13 @@ let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
 "
 "
 let g:ale_linters = {
+
 \   'c++': ['clang'],
+
 \   'c': ['clang'],
+
 \   'python': ['pylint'],
+
 \}
 
 "------------------------------UltiSnips-------------------------------"
@@ -93,51 +99,70 @@ let g:UltiSnipsJumpForwardTrigger="<C-f>"
 "------------------------------UltiSnips-------------------------------"
 
 "nmap <Leader>tb :TagbarToggle<CR>      "快捷键设置
+
 let g:tagbar_ctags_bin='ctags'          "ctags程序的路径
+
 let g:tagbar_width=30                   "窗口宽度的设置
+
 map <F3> :Tagbar<CR>
+
 "autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx call tagbar#autoopen()  "如果是c语言的程序的话，tagbar自动开启
 
 
 " Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
+
 call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+
 "Plug 'junegunn/vim-easy-align'
 
 " Any valid git URL is allowed
+
 "Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 
 " Multiple Plug commands can be written in a single line using | separators
+
 "Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 " On-demand loading
+
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
 Plug 'Yggdroot/LeaderF'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
 Plug 'junegunn/fzf.vim'
 
 Plug 'w0rp/ale'
+
 Plug 'tpope/vim-surround'
+
 Plug 'Valloric/YouCompleteMe'
 
 Plug 'SirVer/ultisnips'
+
 Plug 'honza/vim-snippets'
 
 Plug 'jiangmiao/auto-pairs'
 
 Plug 'majutsushi/tagbar'
+
 Plug 'Chiel92/vim-autoformat'
+
 Plug 'rkulla/pydiction'
+
 " Using a non-master branch
+
 "Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
 " Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
+
 "Plug 'fatih/vim-go', { 'tag': '*' }
 
 " Plugin options
