@@ -254,7 +254,6 @@ hi Pmenu ctermfg=7 ctermbg=236
 hi PmenuSel ctermfg=white ctermbg=32
 hi CocFloating ctermfg=black ctermbg=240
 
-
 let g:coc_global_extensions = ['coc-snippets', 'coc-json', 'coc-pyright']
 
 inoremap <silent><expr> <TAB>
