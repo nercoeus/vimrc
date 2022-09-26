@@ -4,7 +4,8 @@ filetype indent plugin on
 
 set ruler
 
-set paste
+" 不能开启，导致 coc 停止工作
+"set paste
 
 set encoding=utf8
 
@@ -37,7 +38,6 @@ set tabstop=4
 set shiftwidth=4 " 设置自动缩进长度为4空格
 set autoindent " 继承前一行的缩进方式，适用于多行注释
 
-set shiftwidth=4
 set expandtab
 set softtabstop=4
 
@@ -213,8 +213,6 @@ Plug 'majutsushi/tagbar'
 
 Plug 'Chiel92/vim-autoformat'
 
-"Plug 'Yggdroot/LeaderF'
-
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
@@ -248,8 +246,11 @@ highlight GitGutterDelete ctermfg=red
 nnoremap <Leader>p :Rg<CR>'
 nnoremap <Leader><Space> :!<Space>
 
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
 noremap <Leader>t :belowright ter ++rows=15<CR>
 
+" ---------------------------- coc.nvim --------------------------------
+colors ron
+hi Pmenu ctermfg=7 ctermbg=236
+hi PmenuSel ctermfg=white ctermbg=32
+hi CocFloating ctermfg=black ctermbg=240
+" ----------------------------------------------------------------------
