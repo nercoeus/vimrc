@@ -1,50 +1,61 @@
 syntax on
 
 filetype indent plugin on
- 
+
 set ruler
 
+set paste
+
+set encoding=utf8
+
+" 关闭兼容模式
+set nocompatible
+
+set cursorline "突出显示当前行
+
+set showmatch " 显示括号匹配
+
 set showcmd
- 
+
+" 搜索高亮
+set hlsearch
+
 set completeopt=menu,preview,longest
 
-set number
+set backspace=2
 
+set number
 set modeline
 
 set background=dark
 
 set mouse=a
 
-set statusline
+set smartindent
 
-" 设置空格""
-set smartindent  
-set tabstop=4  
-set shiftwidth=4  
-set expandtab  
+set tabstop=4
+set shiftwidth=4 " 设置自动缩进长度为4空格
+set autoindent " 继承前一行的缩进方式，适用于多行注释
+
+set shiftwidth=4
+set expandtab
 set softtabstop=4
+
+" 开启实时搜索
+set incsearch
+" 搜索时大小写不敏感
+set ignorecase
+syntax enable
+syntax on                    " 开启文件类型侦测
+filetype plugin indent on    " 启用自动补全
+
+" 退出插入模式指定类型的文件自动保存
+au InsertLeave *.go,*.sh,*.php write
+
+inoremap jj <ESC>
 
 noremap <F4> :Autoformat<CR>
 let g:autoformat_verbosemode=1
-
-" 设置状态行显示常用信息
-" %F 完整文件路径名
-" %m 当前缓冲被修改标记
-" %m 当前缓冲只读标记
-" %h 帮助缓冲标记
-" %w 预览缓冲标记
-" %Y 文件类型
-" %b ASCII值
-" %B 十六进制值
-" %l 行数
-" %v 列数
-" %p 当前行数占总行数的的百分比
-" %L 总行数
-" %{...} 评估表达式的值，并用值代替
-" %{"[fenc=".(&fenc==""?&enc:&fenc).((exists("+bomb") && &bomb)?"+":"")."]"} 显示文件编码
-
-" %{&ff} 显示文件类型
 
 set statusline=%F%r%h%w%=\ [ft=%Y]\ %{\"[fenc=\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\"+\":\"\").\"]\"}\ [pos=%04l,%04v\ %p%%]\ [len=%L]
 
@@ -57,35 +68,96 @@ set laststatus=2
 
 map <F6> :NERDTreeMirror<CR>
 map <F6> :NERDTreeToggle<CR>
+" 显示隐藏文件
+let NERDTreeShowHidden=1
 
 "------------------------------NERDTree-------------------------------"
 
-"------------------------------pydiction------------------------------"
+"------------------------------vim-go-------------------------------"
 
-filetype plugin on
-let g:pydiction_location = '/home/nercoeus/.vim/plugged/pydiction/complete-dict'
-let g:pydiction_menu_height = 20
+let g:go_fmt_command = "goimports" " 格式化将默认的 gofmt 替换
+let g:go_autodetect_gopath = 1
+let g:go_list_type = "quickfix"
+let g:go_version_warning = 1
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_generate_tags = 1
+let g:godef_split=2
 
-"---------------------------------------------------------------------"
+"------------------------------vim-go-------------------------------"
 
-"------------------------------YCM-------------------------------"
+"------------------------------tagbar-------------------------------"
+nmap <F9> :TagbarToggle<CR>
+let g:tagbar_width=25
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
 
-let g:ycm_server_python_interpreter='/usr/bin/python'
-let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
+"------------------------------tagbar-------------------------------"
 
 
-"------------------------------YCM-------------------------------"
+"------------------------------dracula-------------------------------"
+
+" syntax enable
+"colorscheme dracula
+
+"------------------------------dracula-------------------------------"
+
+"------------------------------nerd-tree-git-------------------------------"
+
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Ignored"   : "☒",
+    \ "Unknown"   : "?"
+    \ }
+
+"------------------------------nerd-tree-git-------------------------------"
 "
-"
-let g:ale_linters = {
+" let g:ale_linters = {
 
-\   'c++': ['clang'],
+" \   'c++': ['clang'],
 
-\   'c': ['clang'],
+" \   'c': ['clang'],
 
-\   'python': ['pylint'],
+" \   'python': ['pylint'],
 
-\}
+" \}
 
 "------------------------------UltiSnips-------------------------------"
 "插入模式下直接通过<C-z>键来触发UltiSnips的代码块补全
@@ -98,7 +170,21 @@ let g:UltiSnipsJumpForwardTrigger="<C-f>"
 
 "------------------------------UltiSnips-------------------------------"
 
-"nmap <Leader>tb :TagbarToggle<CR>      "快捷键设置
+"------------------------------Leaderf-------------------------------"
+
+"let g:Lf_ShortcutF = '<c-p>'
+"let g:Lf_ShowHidden = 1
+"let g:Lf_PreviewInPopup = 1
+"let g:Lf_WindowHeight = 0.30
+"let g:Lf_CacheDirectory = s:cachedir
+"let g:Lf_StlColorscheme = 'powerline'
+"------------------------------Leaderf-------------------------------"
+
+
+autocmd FileType go nnoremap <buffer> g<F12> :call GodefUnderCursor()<cr>
+let g:godef_split=3 """左右打开新窗口的时候
+let g:godef_same_file_in_same_window=1 """函数在同一个文件中时不需要打开新窗口
+
 
 let g:tagbar_ctags_bin='ctags'          "ctags程序的路径
 
@@ -106,48 +192,20 @@ let g:tagbar_width=30                   "窗口宽度的设置
 
 map <F3> :Tagbar<CR>
 
-"autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx call tagbar#autoopen()  "如果是c语言的程序的话，tagbar自动开启
-
-
-" Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
-
 call plug#begin('~/.vim/plugged')
 
-" Make sure you use single quotes
-
-" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
-
-"Plug 'junegunn/vim-easy-align'
-
-" Any valid git URL is allowed
-
-"Plug 'https://github.com/junegunn/vim-github-dashboard.git'
-
-" Multiple Plug commands can be written in a single line using | separators
-
-"Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-
-" On-demand loading
+Plug 'junegunn/vim-easy-align'
 
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 
+" 可以使 nerdtree 的 tab 更加友好些
+Plug 'jistr/vim-nerdtree-tabs'
+
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+Plug 'airblade/vim-gitgutter'
+
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-
-Plug 'Yggdroot/LeaderF'
-
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-
-Plug 'junegunn/fzf.vim'
-
-Plug 'w0rp/ale'
-
-Plug 'tpope/vim-surround'
-
-Plug 'Valloric/YouCompleteMe'
-
-Plug 'SirVer/ultisnips'
-
-Plug 'honza/vim-snippets'
 
 Plug 'jiangmiao/auto-pairs'
 
@@ -155,24 +213,43 @@ Plug 'majutsushi/tagbar'
 
 Plug 'Chiel92/vim-autoformat'
 
+"Plug 'Yggdroot/LeaderF'
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
 Plug 'rkulla/pydiction'
 
-" Using a non-master branch
+" Vim状态栏插件，包括显示行号，列号，文件类型，文件名，以及Git状态
+Plug 'vim-airline/vim-airline'
 
-"Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
-" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
+Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 
-"Plug 'fatih/vim-go', { 'tag': '*' }
+Plug 'Blackrush/vim-gocode'
 
-" Plugin options
-"Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 
-" Plugin outside ~/.vim/plugged with post-update hook
-"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'majutsushi/tagbar'
 
-" Unmanaged plugin (manually installed and updated)
-"Plug '~/my-prototype-plugin'
+Plug 'tpope/vim-fugitive'
 
-" Initialize plugin system
 call plug#end()
+ 
+nmap <F12> <C-]>
+nmap <F10> <C-O>
+nmap <C-p> :Files<CR>
+
+highlight GitGutterAdd    ctermfg=blue
+highlight GitGutterChange ctermfg=green
+highlight GitGutterDelete ctermfg=red
+
+nnoremap <Leader>p :Rg<CR>'
+nnoremap <Leader><Space> :!<Space>
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+noremap <Leader>t :belowright ter ++rows=15<CR>
+
