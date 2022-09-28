@@ -52,7 +52,7 @@ filetype plugin indent on    " 启用自动补全
 " 退出插入模式指定类型的文件自动保存
 au InsertLeave *.go,*.sh,*.php write
 
-inoremap jj <ESC>
+inoremap jk <ESC>
 
 noremap <F4> :Autoformat<CR>
 let g:autoformat_verbosemode=1
@@ -233,8 +233,15 @@ Plug 'majutsushi/tagbar'
 
 Plug 'tpope/vim-fugitive'
 
+Plug 'frazrepo/vim-rainbow'
+
+Plug 'easymotion/vim-easymotion'
+
 call plug#end()
  
+" 使用 ss 启用
+nmap ss <Plug>(easymotion-s2)
+
 nmap <F12> <C-]>
 nmap <F10> <C-O>
 nmap <C-p> :Files<CR>
@@ -319,3 +326,5 @@ function! s:show_documentation()
 	endif
 endfunction
 " ----------------------------------------------------------------------
+
+let g:rainbow_active = 1
