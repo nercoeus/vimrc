@@ -194,7 +194,7 @@ nnoremap <C-f> :Rg<CR>'
 
 "------------------------------- coc.nvim ---------------------------------
 
-colors ron
+" colors ron
 hi Pmenu ctermfg=7 ctermbg=236
 hi PmenuSel ctermfg=white ctermbg=32
 hi CocFloating ctermfg=black ctermbg=240
@@ -271,6 +271,8 @@ let g:godef_split=3 """左右打开新窗口的时候
 let g:godef_same_file_in_same_window=1 """函数在同一个文件中时不需要打开新窗口
 
 call plug#begin('~/.vim/plugged')
+
+"Plug 'dracula/vim', { 'as': 'dracula' }
 
 Plug 'junegunn/vim-easy-align'
 
