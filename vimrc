@@ -55,6 +55,10 @@ set incsearch
 " 搜索时大小写不敏感
 set ignorecase
 
+syntax enable
+syntax on                    " 开启文件类型侦测
+filetype plugin indent on    " 启用自动补全
+
 " 退出插入模式指定类型的文件自动保存
 au InsertLeave *.go,*.sh,*.php,*.py write
 
@@ -65,14 +69,13 @@ inoremap jk <ESC>
 noremap <F4> :Autoformat<CR>
 let g:autoformat_verbosemode=1
 
+" 状态栏设置
+set statusline=%F%r%h%w%=\ [ft=%Y]\ %{\"[fenc=\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\"+\":\"\").\"]\"}\ [pos=%04l,%04v\ %p%%]\ [len=%L]
+
 " 设置 laststatus = 0 ，不显式状态行
 " 设置 laststatus = 1 ，仅当窗口多于一个时，显示状态行
 " 设置 laststatus = 2 ，总是显式状态行
 set laststatus=2
-
-" 状态栏设置
-" set statusline=%F%r%h%w%=\ [ft=%Y]\ %{\"[fenc=\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\"+\":\"\").\"]\"}\ [pos=%04l,%04v\ %p%%]\ [len=%L]
-
 
 " 使用 f10 + f12 进行跳转
 nmap <F12> <C-]>
@@ -87,55 +90,6 @@ noremap <Leader>t :belowright ter ++rows=15<CR>
 highlight GitGutterAdd    ctermfg=blue
 highlight GitGutterChange ctermfg=green
 highlight GitGutterDelete ctermfg=red
-
-
-"----------------------------airline-----------------------------------
-
-let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#formatter = 'unique_tail'
-"let g:airline#extensions#tabline#buffer_nr_show = 1        "显示buffer编号
-let g:airline#extensions#tabline#buffer_nr_format = '%s:'
-let g:airline#extensions#battery#enabled = 1
-let g:airline_theme='onedark'       " 需要安装joshdick/onedark.vim主题插件
-
-let g:airline_powerline_fonts = 1  " 支持 powerline 字体
-
-if !exists('g:airline_symbols')
-let g:airline_symbols = {}
-endif
-let g:airline_left_sep = '▶'
-let g:airline_left_alt_sep = '❯'
-let g:airline_right_sep = '◀'
-let g:airline_right_alt_sep = '❮'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-nnoremap [b :bp<CR>
-nnoremap ]b :bn<CR>
-
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-nmap <leader>1 <Plug>AirlineSelectTab1
-nmap <leader>2 <Plug>AirlineSelectTab2
-nmap <leader>3 <Plug>AirlineSelectTab3
-nmap <leader>4 <Plug>AirlineSelectTab4
-nmap <leader>5 <Plug>AirlineSelectTab5
-nmap <leader>6 <Plug>AirlineSelectTab6
-nmap <leader>7 <Plug>AirlineSelectTab7
-nmap <leader>8 <Plug>AirlineSelectTab8
-nmap <leader>9 <Plug>AirlineSelectTab9
-let g:airline#extensions#tabline#buffer_idx_format = {
-        \ '0': '0 ',
-        \ '1': '1 ',
-        \ '2': '2 ',
-        \ '3': '3 ',
-        \ '4': '4 ',
-        \ '5': '5 ',
-        \ '6': '6 ',
-        \ '7': '7 ',
-        \ '8': '8 ',
-        \ '9': '9 '
-        \}
-"----------------------------------------------------------------------
-
 
 "------------------------------NERDTree-------------------------------"
 
@@ -348,7 +302,6 @@ Plug 'rkulla/pydiction'
 
 " Vim状态栏插件，包括显示行号，列号，文件类型，文件名，以及Git状态
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
