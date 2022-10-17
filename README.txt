@@ -75,7 +75,7 @@ set laststatus=2
 
 
 " 使用 f10 + f12 进行跳转
-nmap <F12> <C-]>
+" nmap <F12> <C-]>
 nmap <F10> <C-O>
 
 " 执行 cmd
@@ -148,10 +148,23 @@ let NERDTreeShowHidden=1
 
 "------------------------------vim-go-------------------------------"
 
-let g:go_fmt_command = "goimports" " 格式化将默认的 gofmt 替换
-let g:go_autodetect_gopath = 1
-let g:go_list_type = "quickfix"
-let g:go_version_warning = 1
+" let g:go_fmt_command = "goimports" " 格式化将默认的 gofmt 替换
+" let g:go_autodetect_gopath = 1
+" let g:go_list_type = "quickfix"
+" let g:go_version_warning = 1
+" let g:go_highlight_types = 1
+" let g:go_highlight_fields = 1
+" let g:go_highlight_functions = 1
+" let g:go_highlight_function_calls = 1
+" let g:go_highlight_operators = 1
+" let g:go_highlight_extra_types = 1
+" let g:go_highlight_methods = 1
+" let g:go_highlight_generate_tags = 1
+" let g:godef_split=2
+" let g:go_diagnostics_enabled = 0
+" let g:go_gopls_options = ['-remote=auto']
+
+" Go语法高亮
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
@@ -160,8 +173,12 @@ let g:go_highlight_operators = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_generate_tags = 1
-let g:godef_split=2
-let g:go_diagnostics_enabled = 0
+
+" 在:w时自动进行GoImports
+function! GoReformat()
+	call go#fmt#Format(1)
+endfunction
+autocmd BufWriteCmd *.go call GoReformat()
 
 "------------------------------vim-go-------------------------------"
 
@@ -286,7 +303,8 @@ nmap <silent> [c <Plug>(coc-diagnostic-prev)
 nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gd <Plug>(coc-definition)
+nmap <F12> <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
@@ -350,7 +368,11 @@ Plug 'rkulla/pydiction'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+"
+" vim-go的极简版，去除了gopls，以及所有coc拥有的功能
+Plug 'fioncat/vim-minigo'
+
 
 " Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 
