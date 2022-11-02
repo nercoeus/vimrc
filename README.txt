@@ -88,6 +88,7 @@ highlight GitGutterAdd    ctermfg=blue
 highlight GitGutterChange ctermfg=green
 highlight GitGutterDelete ctermfg=red
 
+let g:python3_host_prog="/usr/bin/python3.6"
 
 "----------------------------airline-----------------------------------
 
@@ -265,13 +266,13 @@ hi CocFloating ctermfg=black ctermbg=240
 let g:coc_global_extensions = ['coc-snippets', 'coc-json', 'coc-pyright']
 
 inoremap <silent><expr> <TAB>
-            \ pumvisible() ? coc#_select_confirm() :
-            \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ coc#refresh()
+    \ pumvisible() ? coc#_select_confirm() :
+    \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+    \ <SID>check_back_space() ? "\<TAB>" :
+    \ coc#refresh()
 
-" https://github.com/neoclide/coc.nvim/issues/262
-" inoremap <silent><expr> <CR> pumvisible() ? "\<C-y><CR>" : "\<CR>"
+"https://github.com/neoclide/coc.nvim/issues/262
+"inoremap <silent><expr> <CR> pumvisible() ? "\<C-y><CR>" : "\<CR>"
 
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
@@ -329,6 +330,14 @@ function! s:show_documentation()
 endfunction
 
 "------------------------------------------------------------------------
+
+
+"-------------------------indent blankline----------------------------------
+
+let g:indent_blankline_char = '|'
+
+"------------------------------------------------------------------------
+
 
 autocmd FileType go nnoremap <buffer> g<F12> :call GodefUnderCursor()<cr>
 let g:godef_split=3 """左右打开新窗口的时候
@@ -389,6 +398,9 @@ Plug 'frazrepo/vim-rainbow'
 
 " 快速移动
 Plug 'easymotion/vim-easymotion'
+
+" 空格对齐
+Plug 'lukas-reineke/indent-blankline.nvim'
 
 call plug#end()
 
