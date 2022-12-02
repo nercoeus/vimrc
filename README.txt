@@ -55,6 +55,9 @@ set incsearch
 " 搜索时大小写不敏感
 set ignorecase
 
+" 按键粘黏时间置空
+set timeoutlen=1000 ttimeoutlen=0
+
 " 退出插入模式指定类型的文件自动保存
 au InsertLeave *.go,*.sh,*.php,*.py write
 
@@ -89,6 +92,8 @@ highlight GitGutterChange ctermfg=green
 highlight GitGutterDelete ctermfg=red
 
 let g:python3_host_prog="/usr/bin/python3.6"
+
+set clipboard+=unnamedplus
 
 "----------------------------airline-----------------------------------
 
@@ -377,8 +382,8 @@ Plug 'rkulla/pydiction'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-"
+"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
 " vim-go的极简版，去除了gopls，以及所有coc拥有的功能
 Plug 'fioncat/vim-minigo'
 
