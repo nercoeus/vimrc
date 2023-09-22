@@ -55,9 +55,10 @@ set incsearch
 " 搜索时大小写不敏感
 set ignorecase
 
-syntax enable
-syntax on                    " 开启文件类型侦测
-filetype plugin indent on    " 启用自动补全
+" 按键粘黏时间置空
+set timeoutlen=1000 ttimeoutlen=0
+
+set clipboard+=unnamedplus
 
 " 退出插入模式指定类型的文件自动保存
 au InsertLeave *.go,*.sh,*.php,*.py write
@@ -69,17 +70,13 @@ inoremap jk <ESC>
 noremap <F4> :Autoformat<CR>
 let g:autoformat_verbosemode=1
 
-" 状态栏设置
-set statusline=%F%r%h%w%=\ [ft=%Y]\ %{\"[fenc=\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\"+\":\"\").\"]\"}\ [pos=%04l,%04v\ %p%%]\ [len=%L]
-
 " 设置 laststatus = 0 ，不显式状态行
 " 设置 laststatus = 1 ，仅当窗口多于一个时，显示状态行
 " 设置 laststatus = 2 ，总是显式状态行
 set laststatus=2
 
-" 使用 f10 + f12 进行跳转
-nmap <F12> <C-]>
-nmap <F10> <C-O>
+" 状态栏设置
+" set statusline=%F%r%h%w%=\ [ft=%Y]\ %{\"[fenc=\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\"+\":\"\").\"]\"}\ [pos=%04l,%04v\ %p%%]\ [len=%L]
 
 " 执行 cmd
 nnoremap <Leader><Space> :!<Space>
@@ -87,14 +84,75 @@ nnoremap <Leader><Space> :!<Space>
 " 分屏
 noremap <Leader>t :belowright ter ++rows=15<CR>
 
+noremap <Leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
+
 highlight GitGutterAdd    ctermfg=blue
 highlight GitGutterChange ctermfg=green
 highlight GitGutterDelete ctermfg=red
 
+let g:python3_host_prog="/usr/local/bin/python3"
+
+set clipboard+=unnamedplus
+
+" 每次打开文件都从上次退出位置开始编辑
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
+"----------------------------airline-----------------------------------
+
+let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#formatter = 'unique_tail'
+"let g:airline#extensions#tabline#buffer_nr_show = 1        "显示buffer编号
+let g:airline#extensions#tabline#buffer_nr_format = '%s:'
+let g:airline#extensions#battery#enabled = 1
+let g:airline_theme='onedark'       " 需要安装joshdick/onedark.vim主题插件
+
+let g:airline_powerline_fonts = 1  " 支持 powerline 字体
+
+if !exists('g:airline_symbols')
+let g:airline_symbols = {}
+endif
+let g:airline_left_sep = '▶'
+let g:airline_left_alt_sep = '❯'
+let g:airline_right_sep = '◀'
+let g:airline_right_alt_sep = '❮'
+let g:airline_symbols.linenr = '-'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.maxlinenr = ''
+let g:airline_section_c_only_filename = 1
+nnoremap [b :bp<CR>
+nnoremap ]b :bn<CR>
+
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
+let g:airline#extensions#tabline#buffer_idx_format = {
+        \ '0': '0 ',
+        \ '1': '1 ',
+        \ '2': '2 ',
+        \ '3': '3 ',
+        \ '4': '4 ',
+        \ '5': '5 ',
+        \ '6': '6 ',
+        \ '7': '7 ',
+        \ '8': '8 ',
+        \ '9': '9 '
+        \}
+"----------------------------------------------------------------------
+
+
 "------------------------------NERDTree-------------------------------"
 
-map <F6> :NERDTreeMirror<CR>
-map <F6> :NERDTreeToggle<CR>
+map <C-t> :NERDTreeMirror<CR>
+map <C-t> :NERDTreeToggle<CR>
 " 显示隐藏文件
 let NERDTreeShowHidden=1
 
@@ -102,10 +160,23 @@ let NERDTreeShowHidden=1
 
 "------------------------------vim-go-------------------------------"
 
-let g:go_fmt_command = "goimports" " 格式化将默认的 gofmt 替换
-let g:go_autodetect_gopath = 1
-let g:go_list_type = "quickfix"
-let g:go_version_warning = 1
+" let g:go_fmt_command = "goimports" " 格式化将默认的 gofmt 替换
+" let g:go_autodetect_gopath = 1
+" let g:go_list_type = "quickfix"
+" let g:go_version_warning = 1
+" let g:go_highlight_types = 1
+" let g:go_highlight_fields = 1
+" let g:go_highlight_functions = 1
+" let g:go_highlight_function_calls = 1
+" let g:go_highlight_operators = 1
+" let g:go_highlight_extra_types = 1
+" let g:go_highlight_methods = 1
+" let g:go_highlight_generate_tags = 1
+" let g:godef_split=2
+" let g:go_diagnostics_enabled = 0
+" let g:go_gopls_options = ['-remote=auto']
+
+" Go语法高亮
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
@@ -114,8 +185,12 @@ let g:go_highlight_operators = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_generate_tags = 1
-let g:godef_split=2
-let g:go_diagnostics_enabled = 0
+
+" 在:w时自动进行GoImports
+function! GoReformat()
+	call go#fmt#Format(1)
+endfunction
+autocmd BufWriteCmd *.go call GoReformat()
 
 "------------------------------vim-go-------------------------------"
 
@@ -188,7 +263,7 @@ let g:rainbow_active = 1
 "-------------------------------- fzf -------------------------------------
 
 nmap <C-p> :Files<CR>
-nnoremap <C-f> :Rg<CR>'
+nnoremap <C-l> :Rg<CR>'
 
 "--------------------------------------------------------------------------
 
@@ -202,13 +277,13 @@ hi CocFloating ctermfg=black ctermbg=240
 let g:coc_global_extensions = ['coc-snippets', 'coc-json', 'coc-pyright']
 
 inoremap <silent><expr> <TAB>
-            \ pumvisible() ? coc#_select_confirm() :
-            \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ coc#refresh()
+    \ pumvisible() ? coc#_select_confirm() :
+    \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+    \ <SID>check_back_space() ? "\<TAB>" :
+    \ coc#refresh()
 
-" https://github.com/neoclide/coc.nvim/issues/262
-" inoremap <silent><expr> <CR> pumvisible() ? "\<C-y><CR>" : "\<CR>"
+"https://github.com/neoclide/coc.nvim/issues/262
+"inoremap <silent><expr> <CR> pumvisible() ? "\<C-y><CR>" : "\<CR>"
 
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
@@ -240,8 +315,9 @@ nmap <silent> [c <Plug>(coc-diagnostic-prev)
 nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
+nmap <C-]> <Plug>(coc-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <Leader>rn <Plug>(coc-rename)
@@ -266,13 +342,20 @@ endfunction
 
 "------------------------------------------------------------------------
 
-autocmd FileType go nnoremap <buffer> g<F12> :call GodefUnderCursor()<cr>
-let g:godef_split=3 """左右打开新窗口的时候
+
+"-------------------------indent blankline----------------------------------
+
+let g:indent_blankline_char = '|'
+
+"------------------------------------------------------------------------
+
+" autocmd FileType go nnoremap <buffer> <C-]> :call GodefUnderCursor()<cr>
+let g:godef_split=2 """左右打开新窗口的时候
 let g:godef_same_file_in_same_window=1 """函数在同一个文件中时不需要打开新窗口
 
 call plug#begin('~/.vim/plugged')
 
-"Plug 'dracula/vim', { 'as': 'dracula' }
+" Plug 'dgryski/vim-godef'
 
 Plug 'junegunn/vim-easy-align'
 
@@ -302,8 +385,13 @@ Plug 'rkulla/pydiction'
 
 " Vim状态栏插件，包括显示行号，列号，文件类型，文件名，以及Git状态
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+" vim-go的极简版，去除了gopls，以及所有coc拥有的功能
+Plug 'fioncat/vim-minigo'
+
 
 " Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 
@@ -321,5 +409,7 @@ Plug 'frazrepo/vim-rainbow'
 " 快速移动
 Plug 'easymotion/vim-easymotion'
 
-call plug#end()
+" 空格对齐
+Plug 'lukas-reineke/indent-blankline.nvim'
 
+call plug#end()
