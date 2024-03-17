@@ -99,6 +99,12 @@ if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
+"---------------------------- git blame -----------------------------------
+
+nnoremap <Leader>s :<C-u>call gitblame#echo()<CR>
+
+"----------------------------airline-----------------------------------
+
 "----------------------------airline-----------------------------------
 
 let g:airline#extensions#tabline#enabled = 1
@@ -151,8 +157,8 @@ let g:airline#extensions#tabline#buffer_idx_format = {
 
 "------------------------------NERDTree-------------------------------"
 
-map <C-t> :NERDTreeMirror<CR>
-map <C-t> :NERDTreeToggle<CR>
+map <F6> :NERDTreeMirror<CR>
+map <F6> :NERDTreeToggle<CR>
 " 显示隐藏文件
 let NERDTreeShowHidden=1
 
@@ -251,6 +257,8 @@ let g:NERDTreeIndicatorMapCustom = {
 
 " 使用 ss 启用
 nmap ss <Plug>(easymotion-s2)
+" 忽略大小写
+let g:EasyMotion_smartcase = 1
 
 "--------------------------------------------------------------------------
 
@@ -276,11 +284,11 @@ hi CocFloating ctermfg=black ctermbg=240
 
 let g:coc_global_extensions = ['coc-snippets', 'coc-json', 'coc-pyright']
 
-inoremap <silent><expr> <TAB>
-    \ pumvisible() ? coc#_select_confirm() :
-    \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-    \ <SID>check_back_space() ? "\<TAB>" :
-    \ coc#refresh()
+"inoremap <silent><expr> <TAB>
+"    \ pumvisible() ? coc#_select_confirm() :
+"    \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+"    \ <SID>check_back_space() ? "\<TAB>" :
+"    \ coc#refresh()
 
 "https://github.com/neoclide/coc.nvim/issues/262
 "inoremap <silent><expr> <CR> pumvisible() ? "\<C-y><CR>" : "\<CR>"
@@ -318,6 +326,8 @@ nmap <silent> ]c <Plug>(coc-diagnostic-next)
 " nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <C-]> <Plug>(coc-definition)
+nmap <F12> <Plug>(coc-definition)
+map <F10> <C-o>
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <Leader>rn <Plug>(coc-rename)
@@ -339,6 +349,10 @@ function! s:show_documentation()
         let l:found = CocAction('doHover')
     endif
 endfunction
+
+" Use <Tab> and <S-Tab> to navigate the completion list
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 "------------------------------------------------------------------------
 
@@ -387,7 +401,7 @@ Plug 'rkulla/pydiction'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " vim-go的极简版，去除了gopls，以及所有coc拥有的功能
 Plug 'fioncat/vim-minigo'
@@ -411,5 +425,8 @@ Plug 'easymotion/vim-easymotion'
 
 " 空格对齐
 Plug 'lukas-reineke/indent-blankline.nvim'
+
+" git blame
+Plug 'zivyangll/git-blame.vim'
 
 call plug#end()
