@@ -62,45 +62,38 @@ return require('packer').startup(function(use)
         use({
           "junegunn/fzf",
           run = function()
-            vim.fn["fzf#install"]()
+          vim.fn["fzf#install"]()
           end,
         })
 
-        use 'junegunn/fzf.vim' -- needed for previews
+        use 'junegunn/fzf.vim'
         use({
           'neoclide/coc.nvim',
           run = 'yarn install --frozen-lockfile',
         })
+
         use 'antoinemadec/coc-fzf'
 
         use { "ibhagwan/fzf-lua",
           -- optional for icon support
           requires = { "nvim-tree/nvim-web-devicons" }
         }
-
-        --use({
-        --  "linrongbin16/fzfx.nvim",
-        --  -- specify version to avoid break changes
-        --  version = 'v5.0.0',
-        --  config = function()
-        --    require("fzfx").setup()
-        --  end,
-        --})
   
         use 'rkulla/pydiction'
 
         use 'vim-airline/vim-airline'
         use 'vim-airline/vim-airline-themes'
 
-        -- vim-go的极简版，去除了gopls，以及所有coc拥有的功能
-        use 'fioncat/vim-minigo'
-        -- use 'fatih/vim-go'
+        use 'fatih/vim-go'
 
-        use 'majutsushi/tagbar'
+        -- 大文件存在性能问题
+        -- use 'majutsushi/tagbar'
 
         use 'tpope/vim-fugitive'
 
-        use 'frazrepo/vim-rainbow'
+        -- 大文件存在性能问题
+        -- use 'frazrepo/vim-rainbow'
+        -- use 'HiPhish/rainbow-delimiters.nvim'
 
         use 'easymotion/vim-easymotion'
 
@@ -108,16 +101,13 @@ return require('packer').startup(function(use)
 
         use 'zivyangll/git-blame.vim'
 
-        use 'neoclide/coc.nvim'
-
         use 'joshdick/onedark.vim'
 
-        use 'scrooloose/nerdtree'
         use 'ryanoasis/vim-devicons'
-        -- 可以使 nerdtree 的 tab 更加友好些
-        use 'jistr/vim-nerdtree-tabs'
-        -- 目录树展示 git 状态
-        use 'Xuyuanp/nerdtree-git-plugin'
+
+        use 'liuchengxu/vista.vim'
+
+        use 'nvim-tree/nvim-tree.lua'
 
         -- Automatically set up your configuration after cloning packer.nvim
         -- Put this at the end after all plugins

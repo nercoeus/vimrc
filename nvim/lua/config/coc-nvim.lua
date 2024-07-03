@@ -31,7 +31,6 @@ function _G.show_docs()
     end
 end
 
-keyset('n', 'K', '<CMD>lua _G.show_docs()<CR>', { silent = true })
 
 
 -- Use `[c` and `]c` to navigate diagnostics

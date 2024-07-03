@@ -119,15 +119,10 @@ _G.packer_plugins = {
     path = "/data00/home/zhiwei.li/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
   },
-  nerdtree = {
+  ["nvim-tree.lua"] = {
     loaded = true,
-    path = "/data00/home/zhiwei.li/.local/share/nvim/site/pack/packer/start/nerdtree",
-    url = "https://github.com/scrooloose/nerdtree"
-  },
-  ["nerdtree-git-plugin"] = {
-    loaded = true,
-    path = "/data00/home/zhiwei.li/.local/share/nvim/site/pack/packer/start/nerdtree-git-plugin",
-    url = "https://github.com/Xuyuanp/nerdtree-git-plugin"
+    path = "/data00/home/zhiwei.li/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
+    url = "https://github.com/nvim-tree/nvim-tree.lua"
   },
   ["nvim-web-devicons"] = {
     loaded = true,
@@ -149,10 +144,10 @@ _G.packer_plugins = {
     path = "/data00/home/zhiwei.li/.local/share/nvim/site/pack/packer/start/pydiction",
     url = "https://github.com/rkulla/pydiction"
   },
-  tagbar = {
+  ["rainbow-delimiters.nvim"] = {
     loaded = true,
-    path = "/data00/home/zhiwei.li/.local/share/nvim/site/pack/packer/start/tagbar",
-    url = "https://github.com/majutsushi/tagbar"
+    path = "/data00/home/zhiwei.li/.local/share/nvim/site/pack/packer/start/rainbow-delimiters.nvim",
+    url = "https://github.com/HiPhish/rainbow-delimiters.nvim"
   },
   ["vim-airline"] = {
     loaded = true,
@@ -199,20 +194,15 @@ _G.packer_plugins = {
     path = "/data00/home/zhiwei.li/.local/share/nvim/site/pack/packer/start/vim-gitgutter",
     url = "https://github.com/airblade/vim-gitgutter"
   },
-  ["vim-minigo"] = {
+  ["vim-go"] = {
     loaded = true,
-    path = "/data00/home/zhiwei.li/.local/share/nvim/site/pack/packer/start/vim-minigo",
-    url = "https://github.com/fioncat/vim-minigo"
+    path = "/data00/home/zhiwei.li/.local/share/nvim/site/pack/packer/start/vim-go",
+    url = "https://github.com/fatih/vim-go"
   },
-  ["vim-nerdtree-tabs"] = {
+  ["vista.vim"] = {
     loaded = true,
-    path = "/data00/home/zhiwei.li/.local/share/nvim/site/pack/packer/start/vim-nerdtree-tabs",
-    url = "https://github.com/jistr/vim-nerdtree-tabs"
-  },
-  ["vim-rainbow"] = {
-    loaded = true,
-    path = "/data00/home/zhiwei.li/.local/share/nvim/site/pack/packer/start/vim-rainbow",
-    url = "https://github.com/frazrepo/vim-rainbow"
+    path = "/data00/home/zhiwei.li/.local/share/nvim/site/pack/packer/start/vista.vim",
+    url = "https://github.com/liuchengxu/vista.vim"
   }
 }
 

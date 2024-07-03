@@ -73,4 +73,16 @@ if auto_save then
     })
 end
 
+-- 自动格式化 go-import
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*.go",
+    command = ":call CocAction('runCommand', 'editor.action.organizeImport')",
+})
+
+-- 自动打开目录
+vim.api.nvim_create_autocmd("VimEnter", {
+    pattern = "*",
+    command = ":NvimTreeOpen",
+})
+
 vim.g.loaded_perl_provider = 0

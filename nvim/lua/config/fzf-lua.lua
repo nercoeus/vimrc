@@ -130,6 +130,8 @@ vim.api.nvim_set_keymap('n', '<C-g>', [[<CMD>lua require('fzf-lua').live_grep()<
 vim.api.nvim_set_keymap('n', '<space>fs', [[<CMD>lua require('fzf-lua').live_grep_resume()<CR>]], kb.silent_noremap)
 vim.api.nvim_set_keymap('n', '<leader>fp', [[<CMD>lua require('fzf-lua').files_resume()<CR>]], kb.silent_noremap)
 vim.api.nvim_set_keymap('n', '<leader>ff', [[<CMD>lua require('fzf-lua').git_status()<CR>]], kb.silent_noremap)
+vim.api.nvim_set_keymap('n', '<leader>fc', [[<CMD>lua require('fzf-lua').git_commits()<CR>]], kb.silent_noremap)
+vim.api.nvim_set_keymap('n', '<leader>fb', [[<CMD>lua require('fzf-lua').git_branches()<CR>]], kb.silent_noremap)
 -- 搜索当前光标单词
 vim.api.nvim_set_keymap('n', '<leader>fw', [[<CMD>lua require('fzf-lua').grep_cword()<CR>]], kb.silent_noremap)
 vim.api.nvim_set_keymap('n', '<leader>fg', [[<CMD>lua require('fzf-lua').git_files()<CR>]], kb.silent_noremap)
@@ -137,21 +139,6 @@ vim.api.nvim_set_keymap('n', '<leader>fm', [[<CMD>lua require('fzf-lua').marks()
 vim.api.nvim_set_keymap('n', '<leader>fy', [[<CMD>lua require('fzf-lua').registers()<CR>]], kb.silent_noremap)
 vim.api.nvim_set_keymap('n', '<leader>fh', [[<CMD>lua require('fzf-lua').help_tags()<CR>]], kb.silent_noremap)
 vim.api.nvim_set_keymap('n', '<leader>fq', [[<CMD>lua require('fzf-lua').quickfix()<CR>]], kb.silent_noremap)
-vim.api.nvim_set_keymap('n', '<leader>fa', [[<CMD>lua require('fzf-lua').lsp_code_actions()<CR>]], kb.silent_noremap)
--- <silent>
-
-vim.api.nvim_set_keymap(
-  'n',
-  '<leader>fb',
-  [[<CMD>lua require('fzf-lua').lsp_document_diagnostics()<CR>]],
-  kb.silent_noremap
-)
-vim.api.nvim_set_keymap(
-  'n',
-  '<leader>fn',
-  [[<CMD>lua require('fzf-lua').lsp_workspace_diagnostics()<CR>]],
-  kb.silent_noremap
-)
 
 -- vim.cmd [[
 -- highlight FzfLuaNormal guibg=#383850

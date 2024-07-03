@@ -87,6 +87,7 @@ vim.keymap.set('n', '<leader>6', '<Plug>AirlineSelectTab6', opts)
 vim.keymap.set('n', '<leader>7', '<Plug>AirlineSelectTab7', opts)
 vim.keymap.set('n', '<leader>8', '<Plug>AirlineSelectTab8', opts)
 vim.keymap.set('n', '<leader>9', '<Plug>AirlineSelectTab9', opts)
+vim.keymap.set('n', '<leader>c', ':bp | bd #<CR>', opts)
 
 
 ----------------------
@@ -95,3 +96,15 @@ vim.keymap.set('n', '<leader>9', '<Plug>AirlineSelectTab9', opts)
 
 vim.keymap.set('n', '<F12>', '<Plug>(coc-definition)', opts)
 vim.keymap.set('n', '<F10>', '<C-o>', opts)
+
+
+
+-- git blame
+vim.keymap.set('n', '<leader>gb', ':GitBlame<CR>', opts)
+
+
+vim.keymap.set('n', '<leader>v', ':Vista!!<CR>', opts)
+vim.keymap.set('n', '<F9>', ':Vista!!<CR>', opts)
+
+vim.keymap.set('n', 'K', ':call CocAction(\'doHover\')<CR>', opts)
+
